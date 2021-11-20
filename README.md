@@ -1,6 +1,6 @@
 ## DOGS SOCIAL NETWORK MICROSERVICE
 
-###Перед запуском:
+### Перед запуском:
 - Запустите docker container с PostgreSQL
 - Отредактируйте в файле src/main/resources/application.yml url, username и password для того, чтобы приложение присоединилось к базе данных при запуске
 
