@@ -20,6 +20,8 @@
         <java.version>11</java.version>
         <kotlin.version>1.6.0</kotlin.version>
         <flyway.version>7.15.0</flyway.version>
+        <klogger.version>1.12.5</klogger.version>
+        <testcontainers.version>1.16.0</testcontainers.version>
     </properties>
 
     <dependencies>
@@ -37,6 +39,18 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Security dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
 
         <!-- Kotlin dependencies -->
         <dependency>
@@ -56,6 +70,11 @@
             <artifactId>kotlin-maven-noarg</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.microutils</groupId>
+            <artifactId>kotlin-logging</artifactId>
+            <version>${klogger.version}</version>
+        </dependency>
 
         <!--Database + migrations dependencies -->
         <dependency>
@@ -68,6 +87,26 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <!--Test containers dependencies-->
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${testcontainers.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>${testcontainers.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${testcontainers.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -87,7 +126,15 @@
                     </args>
                     <compilerPlugins>
                         <plugin>spring</plugin>
+                        <plugin>no-arg</plugin>
                     </compilerPlugins>
+
+                    <pluginOptions>
+                        <option>no-arg:annotation=com.my.Annotation</option>
+                        <!-- Call instance initializers in the synthetic constructor -->
+                        <!-- <option>no-arg:invokeInitializers=true</option> -->
+                    </pluginOptions>
+
                 </configuration>
                 <dependencies>
                     <dependency>

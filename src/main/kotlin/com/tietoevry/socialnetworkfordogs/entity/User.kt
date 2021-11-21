@@ -18,4 +18,14 @@ data class User(
     val lastname: String,
     val mail: String,
     val phoneNumber: String,
-)
+) {
+    constructor() : this(
+        0,
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+    )
+}

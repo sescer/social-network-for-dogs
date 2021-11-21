@@ -3,3 +3,8 @@ spring:
     url: ${POSTGRES_DB_URL:jdbc:postgresql://localhost:5432/postgres}
     username: ${POSTGRES_DB_USERNAME:postgres}
     password: ${POSTGRES_DB_PASSWORD:postgres}
+
+jwt:
+  token:
+    secret: ${TOKEN_SECRET:socialNetworkForDogsAppDemo}
+    expired: ${TOKEN_EXPIRED:3600000}

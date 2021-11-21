@@ -1,6 +1,9 @@
 package com.tietoevry.socialnetworkfordogs.service
 
+import com.tietoevry.socialnetworkfordogs.dto.UserDto
 import com.tietoevry.socialnetworkfordogs.entity.User
+import com.tietoevry.socialnetworkfordogs.exception.auth.UserNotFoundException
+import com.tietoevry.socialnetworkfordogs.mapper.mapToDto
 import com.tietoevry.socialnetworkfordogs.repository.UserRepository
 import org.springframework.stereotype.Service
 
@@ -9,7 +12,7 @@ class UserService(
     private val repository: UserRepository,
 ) {
 
-    fun createUser(user: User): Long? {
+    fun createUser(user: User): Long {
         return repository.save(user).id
     }
 
