@@ -1,13 +1,9 @@
 package com.tietoevry.socialnetworkfordogs.entity
 
-import javax.persistence.Embeddable
-import javax.persistence.Id
+import java.io.Serializable
 
 
-@Embeddable
-data class FollowId (
-    @Id
-    val from: Long = 0,
-    @Id
+class FollowId:Serializable {
+    val from: Long = 0
     val to: Long = 0
-)
+}

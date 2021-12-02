@@ -1,10 +1,15 @@
 package com.tietoevry.socialnetworkfordogs.entity
 
-import javax.persistence.EmbeddedId
 import javax.persistence.Entity
+import javax.persistence.Enumerated
+import javax.persistence.Id
+import javax.persistence.IdClass
 
 @Entity
-class Follow {
-    @EmbeddedId
-    val followID : FollowId = FollowId(0, 0)
-}
+@IdClass(FollowId::class)
+data class Follow (
+    @Id
+    val from: Long = 0,
+    @Id
+    val to: Long = 0,
+)
