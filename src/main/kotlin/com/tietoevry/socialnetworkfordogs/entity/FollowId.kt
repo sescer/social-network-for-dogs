@@ -4,6 +4,6 @@ import java.io.Serializable
 
 
 class FollowId:Serializable {
-    val from: Long = 0
-    val to: Long = 0
+    val from_id: Long = 0
+    val to_id: Long = 0
 }

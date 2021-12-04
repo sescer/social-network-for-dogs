@@ -1,15 +1,13 @@
 package com.tietoevry.socialnetworkfordogs.entity
 
-import javax.persistence.Entity
-import javax.persistence.Enumerated
-import javax.persistence.Id
-import javax.persistence.IdClass
+import javax.persistence.*
 
 @Entity
 @IdClass(FollowId::class)
+@Table(name="follow")
 data class Follow (
     @Id
-    val from: Long = 0,
+    val from_id: Long = 0 ,
     @Id
-    val to: Long = 0,
+    val to_id: Long = 0 ,
 )
