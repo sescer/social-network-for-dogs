@@ -7,7 +7,7 @@ import javax.persistence.*
 @Table(name="follow")
 data class Follow (
     @Id
-    val from_id: Long = 0 ,
+    val fromId: Long = 0,
     @Id
-    val to_id: Long = 0 ,
+    val toId: Long = 0,
 )
