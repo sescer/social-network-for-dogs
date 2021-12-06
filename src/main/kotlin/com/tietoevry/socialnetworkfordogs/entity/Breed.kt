@@ -1,5 +1,5 @@
 package com.tietoevry.socialnetworkfordogs.entity
 
 enum class Breed{
-    NONE, CORGY;
+    NONE, CORGI;
 }

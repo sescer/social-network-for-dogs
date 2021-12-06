@@ -2,14 +2,13 @@ package com.tietoevry.socialnetworkfordogs.service
 
 import com.tietoevry.socialnetworkfordogs.entity.Breed
 import com.tietoevry.socialnetworkfordogs.entity.Dog
-import com.tietoevry.socialnetworkfordogs.entity.DogSearchQuery
+import com.tietoevry.socialnetworkfordogs.query.DogSearchQuery
 import com.tietoevry.socialnetworkfordogs.entity.Sex
 import com.tietoevry.socialnetworkfordogs.entity.color.Color
 import com.tietoevry.socialnetworkfordogs.repository.DogRepository
 import org.springframework.data.jpa.domain.Specification
 import org.springframework.stereotype.Service
 import java.util.*
-import javax.persistence.criteria.Root
 
 
 @Service
@@ -33,12 +32,12 @@ class DogService(
         return repository.findById(id).get()
     }
 
-    fun searchDog(dogSearchQuery:DogSearchQuery): List<Dog> {
+    fun searchDog(dogSearchQuery: DogSearchQuery): List<Dog> {
         return repository.findAll(
-            isInDateRange(dogSearchQuery.startAge, dogSearchQuery.endAge)
+            isInAgeRange(dogSearchQuery.startAge, dogSearchQuery.endAge)
                 .and(containsNickname(dogSearchQuery.nickname)
                     .and(containsBreed(dogSearchQuery.breed)
-                        .and(containsColor(dogSearchQuery.color)
+                        .and(containsColor(dogSearchQuery.hairColor)
                             .and(containsSex(dogSearchQuery.sex))
                         )
                     )
@@ -46,9 +45,9 @@ class DogService(
         )
     }
 
-    fun containsNickname(nickname: String): Specification<Dog> {
+    fun containsNickname(nickname: String?): Specification<Dog> {
         return Specification<Dog> { root, query, builder ->
-            if (nickname.isNotBlank()) {
+            if (nickname != null && nickname.isNotBlank()) {
                 builder.like(builder.lower(root.get("nickname")), "%${nickname.lowercase(Locale.getDefault())}%")
             } else {
                 null
@@ -56,24 +55,30 @@ class DogService(
         }
     }
 
-    fun isInDateRange(startAge: Int, endAge: Int): Specification<Dog> {
+    fun isInAgeRange(startAge: Int?, endAge: Int?): Specification<Dog> {
         return Specification<Dog> { root, query, builder ->
-            builder.between(root.get("age"), startAge, endAge)
+            if (startAge == null && endAge == null)
+                null
+            else if (startAge == null)
+                builder.lessThanOrEqualTo(root.get("age"), endAge!!)
+            else if (endAge == null)
+                builder.greaterThanOrEqualTo(root.get("age"), startAge)
+            else
+                builder.between(root.get("age"), startAge, endAge)
         }
     }
 
-    fun containsBreed(breed: Breed): Specification<Dog> {
+    fun containsBreed(breed: Breed?): Specification<Dog> {
         return Specification<Dog> { root, query, builder ->
-            if (breed != Breed.NONE) {
+            if (breed != null && breed != Breed.NONE)
                 builder.equal(builder.lower(root.get<String?>("breed").`as`(String::class.java)), "${breed.ordinal}")
-            } else {
+            else
                 null
-            }
         }
     }
-    fun containsColor(color: Color): Specification<Dog> {
+    fun containsColor(color: Color?): Specification<Dog> {
         return Specification<Dog> { root, query, builder ->
-            if (color != Color.NONE) {
+            if (color != null && color != Color.NONE) {
                 builder.equal(builder.lower(root.get<String?>("hairColor").`as`(String::class.java)), "${color.ordinal}")
             } else {
                 null
@@ -81,9 +86,9 @@ class DogService(
         }
     }
 
-    fun containsSex(sex: Sex): Specification<Dog> {
+    fun containsSex(sex: Sex?): Specification<Dog> {
         return Specification<Dog> { root, query, builder ->
-            if (sex != Sex.NONE) {
+            if (sex != null && sex != Sex.NONE) {
                 builder.equal(builder.lower(root.get<String?>("sex").`as`(String::class.java)), "${sex.ordinal}")
             } else {
                 null

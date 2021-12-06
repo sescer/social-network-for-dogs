@@ -1,7 +1,7 @@
 package com.tietoevry.socialnetworkfordogs.controller
 
 import com.tietoevry.socialnetworkfordogs.entity.Dog
-import com.tietoevry.socialnetworkfordogs.entity.DogSearchQuery
+import com.tietoevry.socialnetworkfordogs.query.DogSearchQuery
 import com.tietoevry.socialnetworkfordogs.service.DogService
 import org.springframework.web.bind.annotation.*
 
