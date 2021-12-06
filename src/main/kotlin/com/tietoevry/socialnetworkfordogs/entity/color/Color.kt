@@ -5,4 +5,7 @@ package com.tietoevry.socialnetworkfordogs.entity.color
  */
 enum class Color {
     //TODO: Дополнить цвета (можно пока базовые)
+    NONE,
+    BROWN,
+    BLACK
 }

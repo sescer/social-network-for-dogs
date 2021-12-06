@@ -1,12 +1,9 @@
 package com.tietoevry.socialnetworkfordogs.controller
 
 import com.tietoevry.socialnetworkfordogs.entity.Dog
+import com.tietoevry.socialnetworkfordogs.entity.DogSearchQuery
 import com.tietoevry.socialnetworkfordogs.service.DogService
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("api/v1/dog")
@@ -15,22 +12,27 @@ class DogController(
 ) {
 
     @PostMapping("/create")
-    fun createDog(dog: Dog): Long? {
+    fun createDog(@RequestBody dog: Dog): Long? {
         return service.createDog(dog)
     }
 
     @PostMapping("/update")
-    fun updateDog(dog: Dog) {
+    fun updateDog(@RequestBody dog: Dog) {
         service.updateDog(dog)
     }
 
     @DeleteMapping("/")
-    fun deleteDog(id: Long) {
+    fun deleteDog(@RequestBody id: Long) {
         service.deleteDog(id)
     }
 
     @GetMapping("/")
-    fun getDog(id: Long): Dog {
+    fun getDog(@RequestBody id: Long): Dog {
         return service.getDog(id)
+    }
+
+    @PostMapping("/search")
+    fun search(@RequestBody dogSearchQuery: DogSearchQuery): List<Dog> {
+        return service.searchDog(dogSearchQuery)
     }
 }
