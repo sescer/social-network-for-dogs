@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS meeting
     name                varchar not null,
     creation_date       date not null,
     meeting_date        date not null,
+    author              BIGSERIAL not null,
     status              varchar not null
 );
 
