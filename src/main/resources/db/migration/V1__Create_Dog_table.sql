@@ -19,3 +19,12 @@ CREATE TABLE IF NOT EXISTS user_table
     mail                varchar not null,
     phone_number        varchar not null
 );
+
+CREATE TABLE IF NOT EXISTS messages
+(
+    id                  BIGSERIAL primary key,
+    dog_from           BIGSERIAL not null,
+    dog_to             BIGSERIAL not null,
+    content             varchar not null,
+    creation_date       DATE not null
+);
