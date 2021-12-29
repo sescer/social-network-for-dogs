@@ -21,6 +21,23 @@ CREATE TABLE IF NOT EXISTS user_table
     phone_number        varchar not null
 );
 
+CREATE TABLE IF NOT EXISTS meeting
+(
+    id                  BIGSERIAL primary key,
+    name                varchar not null,
+    creation_date       date not null,
+    meeting_date        date not null,
+    author              BIGSERIAL not null,
+    status              varchar not null
+);
+
+CREATE TABLE IF NOT EXISTS meeting_dog
+(
+    meeting_id          BIGSERIAL not null,
+    dog_id              BIGSERIAL not null,
+    PRIMARY KEY (meeting_id, dog_id)
+);
+
 CREATE TABLE IF NOT EXISTS follow
 (
     from_id            BIGSERIAL not null,
