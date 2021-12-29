@@ -19,3 +19,11 @@ CREATE TABLE IF NOT EXISTS user_table
     mail                varchar not null unique,
     phone_number        varchar not null
 );
+
+CREATE TABLE IF NOT EXISTS follow
+(
+    from_id            BIGSERIAL not null,
+    to_id            BIGSERIAL not null,
+    PRIMARY KEY (from_id, to_id)
+
+);
