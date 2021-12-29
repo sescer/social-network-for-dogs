@@ -28,3 +28,13 @@ CREATE TABLE IF NOT EXISTS follow
     PRIMARY KEY (from_id, to_id)
 
 );
+
+
+CREATE TABLE IF NOT EXISTS messages
+(
+    id                  BIGSERIAL primary key,
+    dog_from           BIGSERIAL not null,
+    dog_to             BIGSERIAL not null,
+    content             varchar not null,
+    creation_date       DATE not null
+);
