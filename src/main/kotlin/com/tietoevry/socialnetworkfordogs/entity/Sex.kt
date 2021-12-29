@@ -1,5 +1,7 @@
 package com.tietoevry.socialnetworkfordogs.entity
 
-enum class Breed{
-    NONE, CORGI;
+enum class Sex {
+    NONE,
+    M,
+    F
 }

@@ -12,10 +12,12 @@ data class Dog(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
-    val nickname: String,
+    val nickname: String = "",
     @Enumerated
-    val breed: Breed,
-    val age: Int,
+    val breed: Breed = Breed.NONE,
+    val age: Int = -1,
     @Enumerated
-    val hairColor: Color,
+    val hairColor: Color = Color.NONE,
+    @Enumerated
+    val sex: Sex = Sex.NONE
 )

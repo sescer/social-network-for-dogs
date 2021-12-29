@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS dog
     nickname            varchar not null,
     breed               integer not null,
     age                 integer not null,
-    hair_color          integer not null
+    hair_color          integer not null,
+    sex                 integer not null
 );
 
 -- Таблица называется не user, потому что user - зарезервированное слово
