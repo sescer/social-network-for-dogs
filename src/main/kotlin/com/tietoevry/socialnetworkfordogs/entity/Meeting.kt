@@ -1,22 +1,33 @@
 package com.tietoevry.socialnetworkfordogs.entity
 
 import org.hibernate.annotations.CreationTimestamp
-import org.springframework.data.annotation.CreatedDate
-import java.util.*
-import javax.persistence.*
+import java.time.LocalDate
+import java.util.Date
+import javax.persistence.Entity
+import javax.persistence.Enumerated
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
 
+/**
+ * Класс встречи
+ */
 @Entity
-data class Meeting (
+data class Meeting(
     //TODO id создателя встречич
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id : Long = 0,
-    val name : String = "",
+    val id: Long,
+    val name: String,
+
     @CreationTimestamp
-    val creationDate : Date? =  Date(1980-1-1),
-    val meetingDate : Date = Date(1980-1-1),
-    val author: Long = 0,
+    val creationDate: LocalDate = LocalDate.now(),
+
+    val meetingDate: Date,
+
+    val author: Long,
+
     @Enumerated
-    val status : MeetingStatus = MeetingStatus.NONE
+    val status: MeetingStatus,
 )
