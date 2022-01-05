@@ -2,27 +2,26 @@ package com.tietoevry.socialnetworkfordogs.entity
 
 import org.hibernate.annotations.CreationTimestamp
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.Date
 import javax.persistence.Entity
 import javax.persistence.Enumerated
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
-
 /**
- * Класс встречи
+ * Class represents entity meeting
  */
 @Entity
 data class Meeting(
-    //TODO id создателя встречич
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
+
     val name: String,
 
     @CreationTimestamp
-    val creationDate: LocalDate = LocalDate.now(),
+    val creationDate: Date = Date(0),
 
     val meetingDate: Date,
 

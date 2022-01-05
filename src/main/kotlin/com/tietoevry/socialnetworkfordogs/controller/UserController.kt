@@ -2,12 +2,7 @@ package com.tietoevry.socialnetworkfordogs.controller
 
 import com.tietoevry.socialnetworkfordogs.entity.User
 import com.tietoevry.socialnetworkfordogs.service.UserService
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("api/v1/user")
@@ -30,7 +25,7 @@ class UserController(
     }
 
     @GetMapping("/")
-    fun getUser(@RequestBody id: Long): User? {
+    fun getUser(@PathVariable id: Long): User? {
         return service.getUser(id)
     }
 }

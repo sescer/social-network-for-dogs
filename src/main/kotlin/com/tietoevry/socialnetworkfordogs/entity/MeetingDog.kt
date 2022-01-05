@@ -4,7 +4,9 @@ import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.IdClass
 import javax.persistence.Table
-
+/**
+ * Class represents entity of connection between meeting and dog
+ */
 @Entity
 @IdClass(MeetingDogId::class)
 @Table(name = "meeting_dog")

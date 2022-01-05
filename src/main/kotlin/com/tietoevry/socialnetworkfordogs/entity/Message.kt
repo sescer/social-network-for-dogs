@@ -7,16 +7,22 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.Table
-
+/**
+ * Class represents messages entity
+ */
 @Entity
 @Table(name = "messages")
 data class Message (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
+
     val dogFrom: Long,
+
     val dogTo: Long,
+
     val content: String,
+
     @CreationTimestamp
     val creationDate: LocalDate,
 )
