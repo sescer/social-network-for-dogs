@@ -14,8 +14,8 @@ data class Meeting (
     val id : Long = 0,
     val name : String = "",
     @CreationTimestamp
-    val creationDate : Date? =  Date(1980-1-1),
-    val meetingDate : Date = Date(1980-1-1),
+    val creationDate : Date? =  Date(0),
+    val meetingDate : Date = Date(0),
     val author: Long = 0,
     @Enumerated
     val status : MeetingStatus = MeetingStatus.NONE

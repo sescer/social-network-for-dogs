@@ -34,5 +34,11 @@ CREATE TABLE IF NOT EXISTS meeting_dog
 (
     meeting_id          BIGSERIAL not null,
     dog_id              BIGSERIAL not null,
+    CONSTRAINT fk_meeting
+        FOREIGN KEY (meeting_id)
+            REFERENCES meeting(id),
+    CONSTRAINT fk_dog
+        FOREIGN KEY (dog_id)
+            REFERENCES dog(id),
     PRIMARY KEY (meeting_id, dog_id)
 );
