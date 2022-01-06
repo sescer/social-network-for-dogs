@@ -19,7 +19,7 @@ class MeetingController (
         val meetingId =  service.createMeeting(meeting)
         val newMeetingDog = MeetingDog(
             meetingId,
-            meeting.author
+            meeting.authorId
         )
         meetingDogService.subscribeOnMeeting(newMeetingDog)
         return  meetingId

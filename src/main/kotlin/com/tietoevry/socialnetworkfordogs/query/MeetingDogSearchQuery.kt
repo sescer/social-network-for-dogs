@@ -1,11 +1,12 @@
 package com.tietoevry.socialnetworkfordogs.query
 
-import java.util.Date
+import java.time.Instant
+
 /**
  * Class represents entity of searching query for searching meetings
  */
 data class MeetingDogSearchQuery (
     val name: String?,
-    val startDate: Date?,
-    val endDate: Date?
+    val startDate: Instant?,
+    val endDate: Instant?
 )

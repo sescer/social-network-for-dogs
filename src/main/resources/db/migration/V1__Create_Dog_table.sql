@@ -25,12 +25,12 @@ CREATE TABLE IF NOT EXISTS meeting
 (
     id                  BIGSERIAL primary key,
     name                varchar not null,
-    creation_date       date not null,
-    meeting_date        date not null,
-    author              BIGSERIAL not null,
+    creation_date       timestamp with time zone not null,
+    meeting_date        timestamp with time zone not null,
+    author_id              BIGSERIAL not null,
     status              varchar not null,
     CONSTRAINT fk_author
-        FOREIGN KEY (author)
+        FOREIGN KEY (author_id)
             REFERENCES dog(id)
 );
 

@@ -1,4 +1,4 @@
-package com.tietoevry.socialnetworkfordogs
+package com.tietoevry.socialnetworkfordogs.follow
 
 import com.tietoevry.socialnetworkfordogs.dto.DogDto
 import com.tietoevry.socialnetworkfordogs.entity.Breed
@@ -124,8 +124,10 @@ class FollowServiceTests @Autowired constructor(
 
         val friendsList:List<Long> = followService.listOfFriends(dogId1)
         val expectedList:List<Long> = listOf(dogId2)
-        Assertions.assertTrue(friendsList.size == expectedList.size
-                && friendsList.containsAll(expectedList) && expectedList.containsAll(friendsList))
+        Assertions.assertTrue(
+            friendsList.size == expectedList.size
+                    && friendsList.containsAll(expectedList) && expectedList.containsAll(friendsList)
+        )
 
     }
 
@@ -143,8 +145,10 @@ class FollowServiceTests @Autowired constructor(
 
         val followersList:List<Long> = followService.listOfFollowers(dogId1)
         val expectedList:List<Long> = listOf(dogId4)
-        Assertions.assertTrue(followersList.size == expectedList.size
-                && followersList.containsAll(expectedList) && expectedList.containsAll(followersList))
+        Assertions.assertTrue(
+            followersList.size == expectedList.size
+                    && followersList.containsAll(expectedList) && expectedList.containsAll(followersList)
+        )
 
     }
 
@@ -162,8 +166,10 @@ class FollowServiceTests @Autowired constructor(
 
         val followingsList:List<Long> = followService.listOfFollowings(dogId1)
         val expectedList:List<Long> = listOf(dogId3)
-        Assertions.assertTrue(followingsList.size == expectedList.size
-                && followingsList.containsAll(expectedList) && expectedList.containsAll(followingsList))
+        Assertions.assertTrue(
+            followingsList.size == expectedList.size
+                    && followingsList.containsAll(expectedList) && expectedList.containsAll(followingsList)
+        )
 
     }
 

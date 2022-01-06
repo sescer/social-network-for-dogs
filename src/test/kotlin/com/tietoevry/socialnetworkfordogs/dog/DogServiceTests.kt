@@ -140,7 +140,7 @@ class DogServiceTests @Autowired constructor(
 
         val dogList = dogService.searchDog(testAllDogSearchQuery)
         Assertions.assertTrue(dogList.size == 1
-                && dogList.first().mapToDto() == testUpdateDog);
+                && dogList.first().mapToDto() == testUpdateDog)
     }
     @Test
     @DisplayName("Create two dogs and searching dog by nickname. Expected - success")
@@ -152,7 +152,7 @@ class DogServiceTests @Autowired constructor(
 
         val dogList = dogService.searchDog(testNicknameDogSearchQuery)
         Assertions.assertTrue(dogList.size == 1
-                && dogList.first().mapToDto() == testUpdateDog);
+                && dogList.first().mapToDto() == testUpdateDog)
     }
     @Test
     @DisplayName("Create two dogs and searching dog by end age. Expected - success")
@@ -165,7 +165,7 @@ class DogServiceTests @Autowired constructor(
         val dogList = dogService.searchDog(testEndAgeDogSearchQuery)
         Assertions.assertTrue(dogList.size == 2
                 && dogList[0].mapToDto() == testDog
-                && dogList[1].mapToDto() == testUpdateDog);
+                && dogList[1].mapToDto() == testUpdateDog)
     }
     @Test
     @DisplayName("Create two dogs and searching dog by start age. Expected - success")
@@ -177,7 +177,7 @@ class DogServiceTests @Autowired constructor(
 
         val dogList = dogService.searchDog(testStartAgeDogSearchQuery)
         Assertions.assertTrue(dogList.size == 1
-                && dogList.first().mapToDto() == testUpdateDog);
+                && dogList.first().mapToDto() == testUpdateDog)
     }
     @Test
     @DisplayName("Searching dog by age range. Expected - success")
@@ -200,6 +200,6 @@ class DogServiceTests @Autowired constructor(
 
         val dogList = dogService.searchDog(testEnumColorDogSearchQuery)
         Assertions.assertTrue(dogList.size == 1
-                && dogList.first().mapToDto() == testUpdateDog);
+                && dogList.first().mapToDto() == testUpdateDog)
     }
 }

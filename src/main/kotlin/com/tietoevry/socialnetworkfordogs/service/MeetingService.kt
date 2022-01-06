@@ -5,6 +5,7 @@ import com.tietoevry.socialnetworkfordogs.query.MeetingDogSearchQuery
 import com.tietoevry.socialnetworkfordogs.repository.MeetingRepository
 import org.springframework.data.jpa.domain.Specification
 import org.springframework.stereotype.Service
+import java.time.Instant
 import java.util.*
 
 /**
@@ -20,7 +21,7 @@ class MeetingService (
      * @param meeting - meeting information to create
      * @return - meeting id
      */
-    fun createMeeting(meeting : Meeting) : Long?{
+    fun createMeeting(meeting: Meeting): Long?{
         return repository.save(meeting).id
     }
     /**
@@ -29,7 +30,7 @@ class MeetingService (
      * @param id - meeting id
      * @return - meeting information
      */
-    fun getMeeting(id : Long) : Meeting{
+    fun getMeeting(id: Long): Meeting{
         return repository.findById(id).get()
     }
     /**
@@ -37,8 +38,8 @@ class MeetingService (
      *
      * @param meeting - meeting info to update
      */
-    fun updateMeeting(meeting: Meeting) {
-        repository.save(meeting)
+    fun updateMeeting(meeting: Meeting): Meeting {
+        return repository.save(meeting)
     }
     /**
      * Method for deleting meeting by id
@@ -57,8 +58,7 @@ class MeetingService (
     fun searchMeetingDog(dogSearchQuery: MeetingDogSearchQuery): List<Meeting> {
         return repository.findAll(
             isInDateRange(dogSearchQuery.startDate, dogSearchQuery.endDate)
-                .and(containsName(dogSearchQuery.name)
-                )
+                .and(containsName(dogSearchQuery.name))
         )
     }
     /**
@@ -68,7 +68,7 @@ class MeetingService (
      * @return - specification of found meeting
      */
     fun containsName(name: String?): Specification<Meeting> {
-        return Specification<Meeting> { root, query, builder ->
+        return Specification<Meeting> { root, _, builder ->
             if (name != null && name.isNotBlank()) {
                 builder.like(builder.lower(root.get("name")), "%${name.lowercase(Locale.getDefault())}%")
             } else {
@@ -84,8 +84,8 @@ class MeetingService (
      *
      * @return - specification of found meeting
      */
-    fun isInDateRange(startDate: Date?, endDate: Date?): Specification<Meeting> {
-        return Specification<Meeting> { root, query, builder ->
+    fun isInDateRange(startDate: Instant?, endDate: Instant?): Specification<Meeting> {
+        return Specification<Meeting> { root, _, builder ->
             if (startDate == null && endDate == null)
                 null
             else if (startDate == null)

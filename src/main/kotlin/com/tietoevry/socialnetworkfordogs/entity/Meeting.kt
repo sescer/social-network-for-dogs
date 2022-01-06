@@ -1,14 +1,9 @@
 package com.tietoevry.socialnetworkfordogs.entity
 
 import org.hibernate.annotations.CreationTimestamp
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.util.Date
-import javax.persistence.Entity
-import javax.persistence.Enumerated
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import java.time.Instant
+import javax.persistence.*
+
 /**
  * Class represents entity meeting
  */
@@ -16,17 +11,17 @@ import javax.persistence.Id
 data class Meeting(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long = 0,
 
-    val name: String,
+    val name: String = "",
 
     @CreationTimestamp
-    val creationDate: Date = Date(0),
+    val creationDate: Instant = Instant.MIN,
 
-    val meetingDate: Date,
+    val meetingDate: Instant = Instant.MIN,
 
-    val author: Long,
+    val authorId: Long = 0L,
 
     @Enumerated
-    val status: MeetingStatus,
+    val status: MeetingStatus = MeetingStatus.NONE,
 )
