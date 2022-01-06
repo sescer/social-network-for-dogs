@@ -98,16 +98,14 @@ class DogServiceTests @Autowired constructor(
     }
 
     @Test
-    @DisplayName("Creating dog. Expecting - success")
-    @Transactional
-    fun createDogTest(){
+    @DisplayName("Create dog. Expected - success")
+    fun createDogTest() {
         val createdDogId = dogService.createDog(testDog.mapToEntity())
         Assertions.assertEquals(testDog, dogRepository.findById(createdDogId).get().mapToDto())
     }
     @Test
-    @DisplayName("Updating dog info. Expecting - success")
-    @Transactional
-    fun updateDogTest(){
+    @DisplayName("Create and update dog info. Expected - success")
+    fun updateDogTest() {
         val createdDogId = dogService.createDog(testDog.mapToEntity())
         Assertions.assertEquals(testDog, dogRepository.findById(createdDogId).get().mapToDto())
 
@@ -116,18 +114,16 @@ class DogServiceTests @Autowired constructor(
 
     }
     @Test
-    @DisplayName("Getting dog info. Expecting - success")
-    @Transactional
-    fun getDogTest(){
+    @DisplayName("Create and get dog. Expected - success")
+    fun getDogTest() {
         val createdDogId = dogService.createDog(testDog.mapToEntity())
         val actual = dogService.getDog(createdDogId)
         Assertions.assertEquals(testDog, actual.mapToDto())
     }
 
     @Test
-    @DisplayName("Deleting dog. Expecting - success")
-    @Transactional
-    fun deleteDogTest(){
+    @DisplayName("Create and delete dog. Expected - Expected throws")
+    fun deleteDogTest() {
         val createdDogId = dogService.createDog(testDog.mapToEntity())
         dogService.deleteDog(createdDogId)
         Assertions.assertThrows(NoSuchElementException::class.java){
@@ -135,9 +131,8 @@ class DogServiceTests @Autowired constructor(
         }
     }
     @Test
-    @DisplayName("Searching dog by all parameters. Expecting - success")
-    @Transactional
-    fun searchDogByAllTest(){
+    @DisplayName("Create two dogs and searching dog by all parameters. Expected - success")
+    fun searchDogByAllTest() {
         val createdDogId1 = dogService.createDog(testDog.mapToEntity())
         Assertions.assertEquals(testDog, dogRepository.findById(createdDogId1).get().mapToDto())
         val createdDogId2 = dogService.createDog(testUpdateDog.mapToEntity())
@@ -148,9 +143,8 @@ class DogServiceTests @Autowired constructor(
                 && dogList.first().mapToDto() == testUpdateDog);
     }
     @Test
-    @DisplayName("Searching dog by nickname. Expecting - success")
-    @Transactional
-    fun searchDogByNicknameTest(){
+    @DisplayName("Create two dogs and searching dog by nickname. Expected - success")
+    fun searchDogByNicknameTest() {
         val createdDogId1 = dogService.createDog(testDog.mapToEntity())
         Assertions.assertEquals(testDog, dogRepository.findById(createdDogId1).get().mapToDto())
         val createdDogId2 = dogService.createDog(testUpdateDog.mapToEntity())
@@ -161,9 +155,8 @@ class DogServiceTests @Autowired constructor(
                 && dogList.first().mapToDto() == testUpdateDog);
     }
     @Test
-    @DisplayName("Searching dog by end age. Expecting - success")
-    @Transactional
-    fun searchDogByEndAgeTest(){
+    @DisplayName("Create two dogs and searching dog by end age. Expected - success")
+    fun searchDogByEndAgeTest() {
         val createdDogId1 = dogService.createDog(testDog.mapToEntity())
         Assertions.assertEquals(testDog, dogRepository.findById(createdDogId1).get().mapToDto())
         val createdDogId2 = dogService.createDog(testUpdateDog.mapToEntity())
@@ -175,9 +168,8 @@ class DogServiceTests @Autowired constructor(
                 && dogList[1].mapToDto() == testUpdateDog);
     }
     @Test
-    @DisplayName("Searching dog by start age. Expecting - success")
-    @Transactional
-    fun searchDogByStartAgeTest(){
+    @DisplayName("Create two dogs and searching dog by start age. Expected - success")
+    fun searchDogByStartAgeTest() {
         val createdDogId1 = dogService.createDog(testDog.mapToEntity())
         Assertions.assertEquals(testDog, dogRepository.findById(createdDogId1).get().mapToDto())
         val createdDogId2 = dogService.createDog(testUpdateDog.mapToEntity())
@@ -188,9 +180,8 @@ class DogServiceTests @Autowired constructor(
                 && dogList.first().mapToDto() == testUpdateDog);
     }
     @Test
-    @DisplayName("Searching dog by age range. Expecting - success")
-    @Transactional
-    fun searchDogByAgeRangeTest(){
+    @DisplayName("Searching dog by age range. Expected - success")
+    fun searchDogByAgeRangeTest() {
         val createdDogId1 = dogService.createDog(testDog.mapToEntity())
         Assertions.assertEquals(testDog, dogRepository.findById(createdDogId1).get().mapToDto())
         val createdDogId2 = dogService.createDog(testUpdateDog.mapToEntity())
@@ -200,9 +191,8 @@ class DogServiceTests @Autowired constructor(
         Assertions.assertTrue(dogList.isEmpty());
     }
     @Test
-    @DisplayName("Searching dog by color. Expecting - success")
-    @Transactional
-    fun searchDogByEnumColorTest(){
+    @DisplayName("Create two dogs and searching dog by color. Expected - success")
+    fun searchDogByEnumColorTest() {
         val createdDogId1 = dogService.createDog(testDog.mapToEntity())
         Assertions.assertEquals(testDog, dogRepository.findById(createdDogId1).get().mapToDto())
         val createdDogId2 = dogService.createDog(testUpdateDog.mapToEntity())

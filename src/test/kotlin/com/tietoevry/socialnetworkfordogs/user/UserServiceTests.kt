@@ -48,16 +48,14 @@ class UserServiceTests @Autowired constructor(
     }
 
     @Test
-    @DisplayName("Creating user. Expecting - success")
-    @Transactional
-    fun createUserTest(){
+    @DisplayName("Create user. Expected - success")
+    fun createUserTest() {
         val createdUserId = userService.createUser(testUser.mapToEntity())
         Assertions.assertEquals(testUser, userRepository.findById(createdUserId).get().mapToDto())
     }
     @Test
-    @DisplayName("Updating user info. Expecting - success")
-    @Transactional
-    fun updateUserTest(){
+    @DisplayName("Create and update user info. Expected - success")
+    fun updateUserTest() {
         val createdUserId = userService.createUser(testUser.mapToEntity())
         Assertions.assertEquals(testUser, userRepository.findById(createdUserId).get().mapToDto())
 
@@ -66,18 +64,16 @@ class UserServiceTests @Autowired constructor(
 
     }
     @Test
-    @DisplayName("Getting user info. Expecting - success")
-    @Transactional
-    fun getUserTest(){
+    @DisplayName("Create and get user info. Expected - success")
+    fun getUserTest() {
         val createdUserId = userService.createUser(testUser.mapToEntity())
         val actual = userService.getUser(createdUserId)
         Assertions.assertEquals(testUser, actual.mapToDto())
     }
 
     @Test
-    @DisplayName("Deleting user. Expecting - success")
-    @Transactional
-    fun deleteUserTest(){
+    @DisplayName("Create and delete user. Expected - exception throws")
+    fun deleteUserTest() {
         val createdUserId = userService.createUser(testUser.mapToEntity())
          userService.deleteUser(createdUserId)
         Assertions.assertThrows(NoSuchElementException::class.java){
