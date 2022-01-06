@@ -1,12 +1,12 @@
 package com.tietoevry.socialnetworkfordogs.service
 
 import com.tietoevry.socialnetworkfordogs.entity.Meeting
-import com.tietoevry.socialnetworkfordogs.entity.MeetingDog
 import com.tietoevry.socialnetworkfordogs.query.MeetingDogSearchQuery
 import com.tietoevry.socialnetworkfordogs.repository.MeetingRepository
 import org.springframework.data.jpa.domain.Specification
 import org.springframework.stereotype.Service
 import java.util.*
+
 /**
  * Class represents CRUD and searching of meetings
  */

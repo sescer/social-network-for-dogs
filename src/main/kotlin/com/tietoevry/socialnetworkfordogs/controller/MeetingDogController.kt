@@ -1,10 +1,8 @@
 package com.tietoevry.socialnetworkfordogs.controller
 
-import com.tietoevry.socialnetworkfordogs.entity.Meeting
 import com.tietoevry.socialnetworkfordogs.entity.MeetingDog
 import com.tietoevry.socialnetworkfordogs.entity.MeetingDogId
 import com.tietoevry.socialnetworkfordogs.service.MeetingDogService
-import com.tietoevry.socialnetworkfordogs.service.MeetingService
 import org.springframework.web.bind.annotation.*
 
 //TODO

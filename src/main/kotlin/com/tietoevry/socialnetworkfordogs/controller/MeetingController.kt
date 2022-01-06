@@ -1,13 +1,11 @@
 package com.tietoevry.socialnetworkfordogs.controller
 
-import com.tietoevry.socialnetworkfordogs.entity.Dog
 import com.tietoevry.socialnetworkfordogs.entity.Meeting
 import com.tietoevry.socialnetworkfordogs.entity.MeetingDog
 import com.tietoevry.socialnetworkfordogs.query.MeetingDogSearchQuery
 import com.tietoevry.socialnetworkfordogs.service.MeetingDogService
 import com.tietoevry.socialnetworkfordogs.service.MeetingService
 import org.springframework.web.bind.annotation.*
-import java.util.*
 
 @RestController
 @RequestMapping("api/v1/meeting")
