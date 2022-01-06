@@ -23,7 +23,7 @@ class DogService(
      * @param dog - user's dog
      * @return - id of created dog
      */
-    fun createDog(dog: Dog): Long? {
+    fun createDog(dog: Dog): Long {
         return repository.save(dog).id
     }
     /**

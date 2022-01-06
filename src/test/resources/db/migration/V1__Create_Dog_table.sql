@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS dog
 CREATE TABLE IF NOT EXISTS user_table
 (
     id                  BIGSERIAL primary key,
-    login               varchar not null unique ,
+    login               varchar not null unique,
     password            varchar not null,
     firstname           varchar not null,
     lastname            varchar not null,
@@ -28,13 +28,22 @@ CREATE TABLE IF NOT EXISTS meeting
     creation_date       date not null,
     meeting_date        date not null,
     author              BIGSERIAL not null,
-    status              varchar not null
+    status              varchar not null,
+    CONSTRAINT fk_author
+        FOREIGN KEY (author)
+            REFERENCES dog(id)
 );
 
 CREATE TABLE IF NOT EXISTS meeting_dog
 (
     meeting_id          BIGSERIAL not null,
     dog_id              BIGSERIAL not null,
+    CONSTRAINT fk_meeting
+        FOREIGN KEY (meeting_id)
+            REFERENCES meeting(id),
+    CONSTRAINT fk_dog
+        FOREIGN KEY (dog_id)
+            REFERENCES dog(id),
     PRIMARY KEY (meeting_id, dog_id)
 );
 
@@ -42,8 +51,13 @@ CREATE TABLE IF NOT EXISTS follow
 (
     from_id            BIGSERIAL not null,
     to_id            BIGSERIAL not null,
+    CONSTRAINT fk_from
+        FOREIGN KEY (from_id)
+            REFERENCES dog(id),
+    CONSTRAINT fk_to
+        FOREIGN KEY (to_id)
+            REFERENCES dog(id),
     PRIMARY KEY (from_id, to_id)
-
 );
 
 
@@ -53,5 +67,11 @@ CREATE TABLE IF NOT EXISTS messages
     dog_from           BIGSERIAL not null,
     dog_to             BIGSERIAL not null,
     content             varchar not null,
-    creation_date       DATE not null
+    creation_date       DATE not null,
+    CONSTRAINT fk_dog_from
+        FOREIGN KEY (dog_from)
+            REFERENCES dog(id),
+    CONSTRAINT fk_dog_to
+        FOREIGN KEY (dog_to)
+            REFERENCES dog(id)
 );
