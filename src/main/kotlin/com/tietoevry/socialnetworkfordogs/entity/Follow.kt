@@ -1,6 +1,10 @@
 package com.tietoevry.socialnetworkfordogs.entity
 
-import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.IdClass
+import javax.persistence.Table
+
 /**
  * Class represents entity followers, followings & friends
  */

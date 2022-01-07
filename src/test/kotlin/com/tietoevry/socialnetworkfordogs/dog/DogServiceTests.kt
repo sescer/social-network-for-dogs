@@ -122,7 +122,7 @@ class DogServiceTests @Autowired constructor(
     }
 
     @Test
-    @DisplayName("Create and delete dog. Expected - Expected throws")
+    @DisplayName("Create and delete dog. Expected - Exception is thrown")
     fun deleteDogTest() {
         val createdDogId = dogService.createDog(testDog.mapToEntity())
         dogService.deleteDog(createdDogId)

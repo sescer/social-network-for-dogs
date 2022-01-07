@@ -5,8 +5,9 @@ import com.tietoevry.socialnetworkfordogs.query.MessageSearchQuery
 import com.tietoevry.socialnetworkfordogs.repository.MessageRepository
 import org.springframework.data.jpa.domain.Specification
 import org.springframework.stereotype.Service
+import java.time.Instant
 import java.util.Locale
-import java.util.Date
+
 /**
  * Class represents message service
  */
@@ -20,7 +21,7 @@ class MessageService (
      * @param message - message to send from dog to another dog
      * @return - id of sent message
      */
-    fun sendMessage(message: Message): Long? {
+    fun sendMessage(message: Message): Long {
         return repository.save(message).id
     }
     /**
@@ -72,6 +73,7 @@ class MessageService (
             isInDateRange(messageSearchQuery.startDate, messageSearchQuery.endDate)
                 .and(containsContent(messageSearchQuery.content)
                     .and(containsDogFrom(idFrom))
+                    .or(containsDogTo(idFrom))
                 )
         )
     }
@@ -85,6 +87,21 @@ class MessageService (
         return Specification<Message> { root, query, builder ->
             if (dogFrom != null) {
                 builder.equal(builder.toLong(root.get("dogFrom")), "${dogFrom}")
+            } else {
+                null
+            }
+        }
+    }
+    /**
+     * Method for creating query to db for searching messages by dog
+     *
+     * @param dogFrom - dog's id to search
+     * @return - specification of found messages
+     */
+    fun containsDogTo(dogFrom: Long?): Specification<Message> {
+        return Specification<Message> { root, query, builder ->
+            if (dogFrom != null) {
+                builder.equal(builder.toLong(root.get("dogTo")), "${dogFrom}")
             } else {
                 null
             }
@@ -112,14 +129,14 @@ class MessageService (
      * @param endDate - end(interval) date of message to search
      * @return - specification of found messages
      */
-    fun isInDateRange(startDate: Date?, endDate: Date?): Specification<Message> {
-        return Specification<Message> { root, query, builder ->
+    fun isInDateRange(startDate: Instant?, endDate: Instant?): Specification<Message> {
+        return Specification<Message> { root, _, builder ->
             if (startDate == null && endDate == null)
                 null
             else if (startDate == null)
                 builder.lessThanOrEqualTo(root.get("creationDate"), endDate!!)
             else if (endDate == null)
-                builder.greaterThanOrEqualTo(root.get("creationDate "), startDate)
+                builder.greaterThanOrEqualTo(root.get("creationDate"), startDate)
             else
                 builder.between(root.get("creationDate"), startDate, endDate)
         }

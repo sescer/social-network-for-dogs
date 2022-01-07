@@ -2,7 +2,12 @@ package com.tietoevry.socialnetworkfordogs.entity
 
 import org.hibernate.annotations.CreationTimestamp
 import java.time.Instant
-import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.Enumerated
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+
 
 /**
  * Class represents entity meeting

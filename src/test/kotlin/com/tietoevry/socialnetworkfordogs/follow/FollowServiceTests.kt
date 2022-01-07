@@ -11,7 +11,11 @@ import com.tietoevry.socialnetworkfordogs.repository.DogRepository
 import com.tietoevry.socialnetworkfordogs.repository.FollowRepository
 import com.tietoevry.socialnetworkfordogs.service.DogService
 import com.tietoevry.socialnetworkfordogs.service.FollowService
-import org.junit.jupiter.api.*
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles

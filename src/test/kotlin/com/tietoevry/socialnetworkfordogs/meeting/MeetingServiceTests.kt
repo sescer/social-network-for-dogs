@@ -3,7 +3,6 @@ package com.tietoevry.socialnetworkfordogs.meeting
 import com.tietoevry.socialnetworkfordogs.dto.DogDto
 import com.tietoevry.socialnetworkfordogs.dto.MeetingDto
 import com.tietoevry.socialnetworkfordogs.entity.Breed
-import com.tietoevry.socialnetworkfordogs.entity.Meeting
 import com.tietoevry.socialnetworkfordogs.entity.MeetingStatus
 import com.tietoevry.socialnetworkfordogs.entity.Sex
 import com.tietoevry.socialnetworkfordogs.entity.color.Color
@@ -14,7 +13,11 @@ import com.tietoevry.socialnetworkfordogs.repository.DogRepository
 import com.tietoevry.socialnetworkfordogs.repository.MeetingRepository
 import com.tietoevry.socialnetworkfordogs.service.DogService
 import com.tietoevry.socialnetworkfordogs.service.MeetingService
-import org.junit.jupiter.api.*
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles

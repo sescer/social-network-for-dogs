@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS messages
     dog_from           BIGSERIAL not null,
     dog_to             BIGSERIAL not null,
     content             varchar not null,
-    creation_date       DATE not null,
+    creation_date      timestamp with time zone not null,
     CONSTRAINT fk_dog_from
         FOREIGN KEY (dog_from)
             REFERENCES dog(id),

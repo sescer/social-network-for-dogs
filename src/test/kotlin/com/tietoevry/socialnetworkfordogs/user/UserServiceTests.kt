@@ -72,7 +72,7 @@ class UserServiceTests @Autowired constructor(
     }
 
     @Test
-    @DisplayName("Create and delete user. Expected - exception throws")
+    @DisplayName("Create and delete user. Expected - exception is thrown")
     fun deleteUserTest() {
         val createdUserId = userService.createUser(testUser.mapToEntity())
          userService.deleteUser(createdUserId)
