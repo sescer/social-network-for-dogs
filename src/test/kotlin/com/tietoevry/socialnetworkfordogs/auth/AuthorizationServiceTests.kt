@@ -1,6 +1,7 @@
 package com.tietoevry.socialnetworkfordogs.auth
 
 import com.tietoevry.socialnetworkfordogs.dto.UserDto
+import com.tietoevry.socialnetworkfordogs.dto.UserLoginDto
 import com.tietoevry.socialnetworkfordogs.exception.auth.UserAlreadyExistsException
 import com.tietoevry.socialnetworkfordogs.exception.auth.UserNotFoundException
 import com.tietoevry.socialnetworkfordogs.repository.UserRepository
@@ -35,6 +36,11 @@ class AuthorizationServiceTests @Autowired constructor(
         "test",
     )
 
+    private val testLoginUser = UserLoginDto(
+        "test",
+        "test",
+    )
+
     @AfterEach
     @Transactional
     fun deleteTestUserFromDB() {
@@ -65,7 +71,7 @@ class AuthorizationServiceTests @Autowired constructor(
     @Transactional
     fun loginUserThatNotRegistered() {
         Assertions.assertThrows(UserNotFoundException::class.java) {
-            authorizationService.login(testUser)
+            authorizationService.login(testLoginUser)
         }
     }
 }

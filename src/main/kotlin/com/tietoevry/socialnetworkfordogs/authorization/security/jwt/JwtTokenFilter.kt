@@ -1,26 +1,23 @@
 package com.tietoevry.socialnetworkfordogs.authorization.security.jwt
 
-import java.io.IOException
 import javax.servlet.FilterChain
-import javax.servlet.ServletException
 import javax.servlet.ServletRequest
 import javax.servlet.ServletResponse
 import javax.servlet.http.HttpServletRequest
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.GenericFilterBean
 
-/**
- * Класс для фильтрации запроса на предмет валидируемого токена.
- */
 class JwtTokenFilter(private val jwtTokenProvider: JwtTokenProvider) : GenericFilterBean() {
 
-    @Throws(IOException::class, ServletException::class)
-    override fun doFilter(req: ServletRequest, res: ServletResponse, filterChain: FilterChain) {
-        val token = jwtTokenProvider.resolveToken((req as HttpServletRequest))
-        if (token != null && jwtTokenProvider.validateToken(token)) {
-            val auth = jwtTokenProvider.getAuthentication(token)
-            SecurityContextHolder.getContext().authentication = auth
+    override fun doFilter(request: ServletRequest, response: ServletResponse?, filterChain: FilterChain) {
+        val resolvedToken = jwtTokenProvider.resolveToken(request as HttpServletRequest)
+        resolvedToken?.takeIf { token ->
+            jwtTokenProvider.validateToken(token)
+        }?.let { token ->
+            jwtTokenProvider.getAuthentication(token).let { authentication ->
+                SecurityContextHolder.getContext().authentication = authentication
+            }
         }
-        filterChain.doFilter(req, res)
+        filterChain.doFilter(request, response)
     }
 }

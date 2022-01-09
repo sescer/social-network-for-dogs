@@ -6,5 +6,6 @@ spring:
 
 jwt:
   token:
-    secret: ${TOKEN_SECRET:socialNetworkForDogsAppDemo}
+    secret: ${TOKEN_SECRET:appDemo}
     expired: ${TOKEN_EXPIRED:3600000}
+

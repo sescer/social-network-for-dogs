@@ -2,6 +2,7 @@ package com.tietoevry.socialnetworkfordogs.controller
 
 import com.tietoevry.socialnetworkfordogs.configuration.security.SecurityConfiguration
 import com.tietoevry.socialnetworkfordogs.dto.UserDto
+import com.tietoevry.socialnetworkfordogs.dto.UserLoginDto
 import com.tietoevry.socialnetworkfordogs.service.AuthorizationService
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
@@ -20,7 +21,7 @@ class AuthorizationController(
     }
 
     @PostMapping(SecurityConfiguration.LOGIN_ENDPOINT)
-    fun login(@RequestBody @Validated userDto: UserDto): ResponseEntity<String> {
+    fun login(@RequestBody @Validated userDto: UserLoginDto): ResponseEntity<String> {
         return authorizationService.login(userDto)
     }
 }

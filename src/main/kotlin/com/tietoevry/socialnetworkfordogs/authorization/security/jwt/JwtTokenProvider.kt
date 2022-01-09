@@ -1,7 +1,5 @@
 package com.tietoevry.socialnetworkfordogs.authorization.security.jwt
 
-import io.jsonwebtoken.Claims
-import io.jsonwebtoken.Jws
 import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
@@ -9,13 +7,13 @@ import java.util.Base64
 import java.util.Date
 import javax.annotation.PostConstruct
 import javax.servlet.http.HttpServletRequest
-import org.springframework.security.core.Authentication
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.Authentication
 import org.springframework.security.core.userdetails.UserDetailsService
-import org.springframework.security.crypto.password.NoOpPasswordEncoder
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
 
@@ -23,37 +21,28 @@ import org.springframework.stereotype.Component
  * Класс настройки провайдера. Можно настраивать время валидации, а также ключ.
  */
 @Component
-class JwtTokenProvider(
+class JwtTokenProvider {
     @Value("\${jwt.token.secret}")
-    private var secret: String,
+    private var secret: String? = null
 
     @Value("\${jwt.token.expired}")
-    private val validityInMilliseconds: Long,
+    private val validityInMilliseconds: Long = 0
 
     @Autowired
-    private val userDetailsService: UserDetailsService,
-) {
-
-    /**
-     * Блок для определения статических полей и функций.
-     */
-    companion object {
-        private const val AUTH_HEADER_START_STRING = "Bearer "
-        private const val AUTH_HEADER_ATTRIBUTE_NAME = "Authorization"
-    }
+    private val userDetailsService: UserDetailsService? = null
 
     @Bean
     fun passwordEncoder(): PasswordEncoder {
-        return NoOpPasswordEncoder.getInstance()
+        return BCryptPasswordEncoder()
     }
 
     @PostConstruct
     protected fun init() {
-        secret = Base64.getEncoder().encodeToString(secret.toByteArray())
+        secret = Base64.getEncoder().encodeToString(secret!!.toByteArray())
     }
 
     fun createToken(username: String?): String {
-        val claims: Claims = Jwts.claims().setSubject(username)
+        val claims = Jwts.claims().setSubject(username)
         val now = Date()
         val validity = Date(now.time + validityInMilliseconds)
         return Jwts.builder()
@@ -65,7 +54,7 @@ class JwtTokenProvider(
     }
 
     fun getAuthentication(token: String?): Authentication {
-        val userDetails = userDetailsService.loadUserByUsername(getUsername(token))
+        val userDetails = userDetailsService!!.loadUserByUsername(getUsername(token))
         return UsernamePasswordAuthenticationToken(userDetails, "", userDetails.authorities)
     }
 
@@ -82,12 +71,17 @@ class JwtTokenProvider(
 
     fun validateToken(token: String?): Boolean {
         return try {
-            val claims: Jws<Claims> = Jwts.parser().setSigningKey(secret).parseClaimsJws(token)
+            val claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token)
             !claims.body.expiration.before(Date())
         } catch (e: JwtException) {
             false
         } catch (e: IllegalArgumentException) {
             false
         }
+    }
+
+    companion object {
+        private const val AUTH_HEADER_START_STRING = "Bearer "
+        private const val AUTH_HEADER_ATTRIBUTE_NAME = "Authorization"
     }
 }

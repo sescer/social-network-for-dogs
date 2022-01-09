@@ -106,7 +106,6 @@
             <artifactId>junit-jupiter</artifactId>
             <version>${testcontainers.version}</version>
         </dependency>
-
     </dependencies>
 
     <build>

@@ -2,6 +2,7 @@ package com.tietoevry.socialnetworkfordogs.service
 
 import com.tietoevry.socialnetworkfordogs.authorization.security.jwt.JwtTokenProvider
 import com.tietoevry.socialnetworkfordogs.dto.UserDto
+import com.tietoevry.socialnetworkfordogs.dto.UserLoginDto
 import com.tietoevry.socialnetworkfordogs.exception.auth.UserAlreadyExistsException
 import com.tietoevry.socialnetworkfordogs.exception.auth.UserNotFoundException
 import com.tietoevry.socialnetworkfordogs.mapper.mapToEntity
@@ -32,7 +33,7 @@ class AuthorizationService(
      * @return - ResponseEntity с токеном в виде строки
      */
     @Transactional(readOnly = true)
-    fun login(userDto: UserDto): ResponseEntity<String> {
+    fun login(userDto: UserLoginDto): ResponseEntity<String> {
         logger.info { "Пользователь с логином: ${userDto.login} подал запрос на аутентификацию" }
         val user = userRepository.findByLogin(userDto.login).orElseThrow {
             throw UserNotFoundException("Пользователя с логином ${userDto.login} не существует")
