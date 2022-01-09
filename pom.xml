@@ -22,6 +22,7 @@
         <flyway.version>7.15.0</flyway.version>
         <klogger.version>1.12.5</klogger.version>
         <testcontainers.version>1.16.0</testcontainers.version>
+        <springdoc.version>1.5.12</springdoc.version>
     </properties>
 
     <dependencies>
@@ -86,6 +87,23 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+        <!-- Swagger dependencies -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-data-rest</artifactId>
+            <version>${springdoc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-security</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
 
         <!--Test containers dependencies-->

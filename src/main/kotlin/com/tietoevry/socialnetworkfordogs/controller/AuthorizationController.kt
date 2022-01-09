@@ -15,6 +15,7 @@ class AuthorizationController(
     private val authorizationService: AuthorizationService,
 ) {
 
+
     @PostMapping(SecurityConfiguration.REGISTER_ENDPOINT)
     fun register(@RequestBody @Validated userDto: UserDto): ResponseEntity<Long> {
         return authorizationService.register(userDto)

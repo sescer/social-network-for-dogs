@@ -9,3 +9,6 @@ jwt:
     secret: ${TOKEN_SECRET:appDemo}
     expired: ${TOKEN_EXPIRED:3600000}
 
+springdoc:
+  api-docs:
+    path: ${API_DOCS_PATH:/api-docs}
